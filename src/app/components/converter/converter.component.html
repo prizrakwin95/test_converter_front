@@ -1,0 +1,94 @@
+<mat-tab-group animationDuration="100ms">
+  <mat-tab label="КОНВЕРТЕР">
+    <table class="table">
+      <tr>
+        <td>
+          <mat-form-field  class="select" appearance="fill">
+            <mat-label>Выбор валюты</mat-label>
+            <mat-select  [(ngModel)]="selected1" [value]="selected1" (selectionChange)="editValue1()" >
+              <mat-option *ngFor="let item of conValcurs.valutes" ([value1])="selected1.value" [value]="item" >{{item.charCode+" ("+item.name+")"}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field  class="select" appearance="fill">
+            <mat-label>Выбор валюты</mat-label>
+            <mat-select [(ngModel)]="selected2"(selectionChange)="editValue2()" >
+              <mat-option *ngFor="let item2 of conValcurs.valutes"   [value]="item2" >{{item2.charCode+" ("+item2.name+")"}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="input_valute">
+            <mat-label>Курс к Рублю</mat-label>
+            <input readonly="readonly" type="number" [(ngModel)]="firstValuteValue" matInput placeholder="Курс к Рублю" [value]="firstValuteValue">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="input_valute">
+            <mat-label>Курс к Рублю</mat-label>
+            <input readonly="readonly" type="number" [(ngModel)]="secondValuteValue" matInput placeholder="Курс к Рублю" [value]="value2">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" class="td">
+          <mat-form-field class="input_valute">
+            <mat-label>Количество</mat-label>
+            <input [(ngModel)]="quantity" type="number" matInput placeholder="Количество" [value]="quantity">
+          </mat-form-field>
+        </td>
+        <td align="center"  class="td">
+          <button class="buttonConvert" (click)="getResult()" mat-raised-button color="primary">Конвертировать</button>
+        </td>
+      </tr>
+    </table>
+    Результат: {{valueResult | number: '.2'}}<br>
+  </mat-tab>
+  <mat-tab label="ИСТОРИЯ">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. RUB" #input >
+    </mat-form-field>
+
+    <table mat-table [dataSource]=dataSource class="history-table">
+
+      <ng-container matColumnDef="valute1">
+        <th mat-header-cell *matHeaderCellDef > Исходная валюта </th>
+        <td mat-cell *matCellDef="let element">{{element.firstValute}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="valute2">
+        <th mat-header-cell *matHeaderCellDef> Целевая валюта </th>
+        <td mat-cell *matCellDef="let element"> {{element.secondValute}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sum">
+        <th mat-header-cell *matHeaderCellDef> Исходная сумма </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstSum | number: '.2'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cel-sum">
+        <th mat-header-cell *matHeaderCellDef> Целевая сумма </th>
+        <td mat-cell *matCellDef="let element"> {{element.resultSum | number: '.2'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Дата </th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="5">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+  </mat-tab>
+</mat-tab-group>
+
+<br><br><br><br><button  class="buttonExit"  (click)="exit()" mat-raised-button color="primary">ВЫХОД</button>

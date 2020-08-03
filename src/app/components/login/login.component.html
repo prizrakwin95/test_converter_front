@@ -1,0 +1,34 @@
+<mat-tab-group animationDuration="100ms">
+  <mat-tab label="ВХОД">
+    <mat-form-field class="input">
+      <mat-label> LOGIN </mat-label>
+      <input matInput placeholder="LOGIN" [(ngModel)]=userName value="">
+    </mat-form-field><br>
+
+    <mat-form-field class="input">
+      <mat-label> PASSWORD </mat-label>
+      <input matInput placeholder="PASSWORD" type="password" [(ngModel)]=userPass value="">
+    </mat-form-field><br>
+    <button class="button" (click)="getToken()" mat-raised-button color="primary">ВХОД</button>
+  </mat-tab>
+  <mat-tab label="РЕГИСТРАЦИЯ">
+    <mat-form-field class="input">
+      <mat-label> LOGIN </mat-label>
+      <input matInput placeholder="LOGIN" [(ngModel)]=userName value="">
+    </mat-form-field><br>
+    <mat-form-field class="input">
+      <mat-label> PASSWORD </mat-label>
+      <input matInput placeholder="PASSWORD" type="password" [(ngModel)]=userPass value="">
+    </mat-form-field><br>
+    <mat-form-field class="input">
+      <mat-label> CONFIRM PASSWORD </mat-label>
+      <input matInput placeholder="CONFIRM PASSWORD" type="password" [(ngModel)]=confirmPass value="">
+    </mat-form-field><br>
+    <button class="button" (click)="addUser()"  mat-raised-button color="primary">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+  </mat-tab>
+</mat-tab-group>
+{{tmp}}
+<br>
+<br>
+
+

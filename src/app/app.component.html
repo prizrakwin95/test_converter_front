@@ -1,0 +1,6 @@
+  <h1>{{ appTitle }}</h1>
+  <app-login *ngIf="isAutorize;else mainPage" (isAutorize)="autorize($event)"></app-login>
+<ng-template #mainPage>
+  <app-converter [conValcurs]="appValcurs" (isAutorize)="autorize($event)"></app-converter>
+</ng-template>
+
